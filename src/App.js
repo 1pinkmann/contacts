@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ContactsWrapper from './components/Contacts/ContactsWrapper';
+import Contacts from './modules/Contacts/components/Contacts';
 
 
 export default class App extends Component {
 
     render() {
         return(
-            <ContactsWrapper/>
+            <Contacts/>
         );
     }
 }

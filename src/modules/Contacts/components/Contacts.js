@@ -4,9 +4,9 @@ import ContactsButton from './ContactsButton';
 import ContactsForm from './ContactsForm';
 import './contacts.css';
 
-import {getContacts, removeContact, createContact, editContact} from '../../services/contactsService';
+import {getContacts, removeContact, createContact, editContact} from '../service/contactsService';
 
-export default class ContactsWrapper extends Component {
+export default class Contacts extends Component {
 
     state = {
         contacts: [],
