@@ -4,7 +4,7 @@ import ContactsButton from './ContactsButton';
 export default class ContactsForm extends Component {
 
     state = {
-        user: {
+        user: this.props.user || {
             name: '',
             surname: '',
             phone: ''
@@ -13,7 +13,7 @@ export default class ContactsForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleCreateContact(this.state.user);
+        this.props.handleSaveContact(this.state.user);
     }
 
     onInputChange = (e) => {
@@ -25,7 +25,6 @@ export default class ContactsForm extends Component {
     }
 
     render() {
-        console.log(this.props.user);
         return (
             <React.Fragment>
                 <form className='contacts__form' onSubmit={this.handleSubmit}>
@@ -46,7 +45,7 @@ export default class ContactsForm extends Component {
                         onChange={this.onInputChange} 
                     />
                     <input 
-                        type="number" 
+                        type="text"
                         name="phone" 
                         className="contacts__form-input" 
                         placeholder="Номер телефона" 
