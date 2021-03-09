@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContactsWrapper from './components/ContactsTable/ContactsWrapper';
+import ContactsWrapper from './components/Contacts/ContactsWrapper';
 
 
 export default class App extends Component {
