@@ -42,9 +42,7 @@ export default class ContactsWrapper extends Component {
             let id = contact.id;
             editContact(contact)
                 .then((data) => {
-                    let editingArr = this.state.contacts.filter((item) => item.id !== id);
-                    editingArr.push(data);
-                    this.setState({contacts: editingArr});
+                    this.setState({contacts: this.state.contacts.map(item => item.id !== id ? item : contact)});
                     this.handleShowForm();
                 })
         } else {
