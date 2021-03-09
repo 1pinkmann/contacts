@@ -4,7 +4,7 @@ import ContactsButton from './ContactsButton';
 export default class ContactsForm extends Component {
 
     state = {
-        user: this.props.user || {
+        contact: this.props.contact || {
             name: '',
             surname: '',
             phone: ''
@@ -13,13 +13,13 @@ export default class ContactsForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleSaveContact(this.state.user);
+        this.props.handleSaveContact(this.state.contact);
     }
 
     onInputChange = (e) => {
         this.setState({
-            user: {
-                ...this.state.user, [e.target.name]: e.target.value
+            contact: {
+                ...this.state.contact, [e.target.name]: e.target.value
             }
         })
     }
@@ -33,7 +33,7 @@ export default class ContactsForm extends Component {
                         name="name" 
                         className="contacts__form-input" 
                         placeholder="Имя" 
-                        value={this.state.user.name} 
+                        value={this.state.contact.name}
                         onChange={this.onInputChange} 
                     />
                     <input 
@@ -41,7 +41,7 @@ export default class ContactsForm extends Component {
                         name="surname" 
                         className="contacts__form-input" 
                         placeholder="Фамилия" 
-                        value={this.state.user.surname} 
+                        value={this.state.contact.surname}
                         onChange={this.onInputChange} 
                     />
                     <input 
@@ -49,11 +49,11 @@ export default class ContactsForm extends Component {
                         name="phone" 
                         className="contacts__form-input" 
                         placeholder="Номер телефона" 
-                        value={this.state.user.phone} 
+                        value={this.state.contact.phone}
                         onChange={this.onInputChange} 
                     />
-                    <ContactsButton title="Сохранить" type={'submit'} />
-                    <ContactsButton title="Отмена" handleClick={this.props.handleShowForm} type={'button'} />
+                    <ContactsButton title="Сохранить" type="submit" />
+                    <ContactsButton title="Отмена" handleClick={this.props.handleHideForm} type="button" />
                 </form>
                 <div className="background"></div>
             </React.Fragment>

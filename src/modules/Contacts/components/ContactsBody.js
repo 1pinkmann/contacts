@@ -7,7 +7,7 @@ export default class ContactsBody extends Component {
         return (
             <tbody>
                 {this.props.contactsList.map(item => {
-                    return <ContactsItem key = {item.id} contact = {item} handleRemove = {this.props.handleRemove} handleEditContact = {this.props.handleEditContact} handleShowForm = {this.props.handleShowForm} />
+                    return <ContactsItem key = {item.id} contact = {item} handleRemove = {this.props.handleRemove} handleEditContact = {this.props.handleEditContact} />
                 })}
             </tbody>
         );

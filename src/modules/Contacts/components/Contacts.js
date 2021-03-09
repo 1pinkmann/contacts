@@ -57,6 +57,7 @@ export default class Contacts extends Component {
     }
 
     handleEditContact = (editingContact) => {
+        this.handleShowForm();
         this.setState({
             editingContact: editingContact
         })
@@ -66,12 +67,12 @@ export default class Contacts extends Component {
         return (
             <div className="contacts">
                 <ContactsTable contactsList={this.state.contacts} handleRemove={this.handleRemove}
-                               handleEditContact={this.handleEditContact} handleShowForm={this.handleShowForm}/>
+                               handleEditContact={this.handleEditContact}/>
                 <ContactsButton title="Добавить" handleClick={this.handleShowForm}/>
 
                 {this.state.showForm ?
-                    <ContactsForm handleSaveContact={this.handleSaveContact} handleShowForm={this.handleShowForm}
-                                  user={this.state.editingContact}/> : null}
+                    <ContactsForm handleSaveContact={this.handleSaveContact} handleHideForm={this.handleShowForm}
+                                  contact={this.state.editingContact}/> : null}
             </div>
         );
     }

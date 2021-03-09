@@ -8,7 +8,7 @@ export default class ContactsTable extends Component {
         return(
             <table className="contacts__table">
                 <ContactsHead />
-                <ContactsBody contactsList = {this.props.contactsList} handleRemove = {this.props.handleRemove} handleEditContact = {this.props.handleEditContact} handleShowForm = {this.props.handleShowForm} />
+                <ContactsBody contactsList = {this.props.contactsList} handleRemove = {this.props.handleRemove} handleEditContact = {this.props.handleEditContact} />
             </table>
         );
     }

@@ -5,13 +5,11 @@ export default class ContactsItem extends Component {
 
     handleRemoveClick = (e) => {
         e.stopPropagation();
-
         this.props.handleRemove(this.props.contact.id);
     }
 
     handleEditClick = (e) => {
         e.stopPropagation();
-        this.props.handleShowForm();
         this.props.handleEditContact(this.props.contact);
     }
 
