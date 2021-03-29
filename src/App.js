@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Contacts from './modules/Contacts/components/Contacts';
 
 
-export default class App extends Component {
+export default function App () {
 
-    render() {
-        return(
-            <Contacts/>
-        );
-    }
+    return <Contacts/>;
 }

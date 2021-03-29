@@ -1,62 +1,58 @@
-import React, { Component } from 'react';
+import {React, useState} from 'react';
 import ContactsButton from './ContactsButton';
 
-export default class ContactsForm extends Component {
+export default function ContactsForm ({contact, handleSaveContact, handleHideForm}) {
 
-    state = {
-        contact: this.props.contact || {
+    const [contactState, setContactState] = useState(
+        contact || {
             name: '',
             surname: '',
             phone: ''
         }
-    }
+    );
 
-    handleSubmit = (e) => {
+    let handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleSaveContact(this.state.contact);
-    }
+        handleSaveContact(contactState);
+    };
 
-    onInputChange = (e) => {
-        this.setState({
-            contact: {
-                ...this.state.contact, [e.target.name]: e.target.value
-            }
-        })
-    }
+    let onInputChange = (e) => {
+        setContactState({
+            ...contactState, [e.target.name]: e.target.value
+        });
+    };
 
-    render() {
-        return (
-            <React.Fragment>
-                <form className='contacts__form' onSubmit={this.handleSubmit}>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        className="contacts__form-input" 
-                        placeholder="Имя" 
-                        value={this.state.contact.name}
-                        onChange={this.onInputChange} 
-                    />
-                    <input 
-                        type="text" 
-                        name="surname" 
-                        className="contacts__form-input" 
-                        placeholder="Фамилия" 
-                        value={this.state.contact.surname}
-                        onChange={this.onInputChange} 
-                    />
-                    <input 
-                        type="text"
-                        name="phone" 
-                        className="contacts__form-input" 
-                        placeholder="Номер телефона" 
-                        value={this.state.contact.phone}
-                        onChange={this.onInputChange} 
-                    />
-                    <ContactsButton title="Сохранить" type="submit" />
-                    <ContactsButton title="Отмена" handleClick={this.props.handleHideForm} type="button" />
-                </form>
-                <div className="background"></div>
-            </React.Fragment>
-        );
-    }
+    return (
+        <>
+            <form className='contacts__form' onSubmit={handleSubmit}>
+                <input 
+                    type="text" 
+                    name="name" 
+                    className="contacts__form-input" 
+                    placeholder="Имя" 
+                    value={contactState.name}
+                    onChange={onInputChange} 
+                />
+                <input 
+                    type="text" 
+                    name="surname" 
+                    className="contacts__form-input" 
+                    placeholder="Фамилия" 
+                    value={contactState.surname}
+                    onChange={onInputChange} 
+                />
+                <input 
+                    type="text"
+                    name="phone" 
+                    className="contacts__form-input" 
+                    placeholder="Номер телефона" 
+                    value={contactState.phone}
+                    onChange={onInputChange} 
+                />
+                <ContactsButton title="Сохранить" type="submit" />
+                <ContactsButton title="Отмена" handleClick={handleHideForm} type="button" />
+            </form>
+            <div className="background"></div>
+        </>
+    );
 }

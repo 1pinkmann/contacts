@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ContactsButton extends Component {
+export default function ContactsButton ({type, handleClick, title}) {
 
-    render() {
-        return(
-            <button type = {this.props.type} className="button" onClick = {this.props.handleClick}>{this.props.title}</button>
-        );
-    }
+    return <button type = {type} className="button" onClick = {handleClick}>{title}</button>;
 }

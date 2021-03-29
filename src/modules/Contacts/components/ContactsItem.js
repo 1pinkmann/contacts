@@ -1,29 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-export default class ContactsItem extends Component {
+export default function ContactsItem ({contact, handleRemove, handleEditContact}) {
 
-    handleRemoveClick = (e) => {
+    let handleRemoveClick = (e) => {
         e.stopPropagation();
-        this.props.handleRemove(this.props.contact.id);
+        handleRemove(contact.id);
     }
 
-    handleEditClick = (e) => {
+    let handleEditClick = (e) => {
         e.stopPropagation();
-        this.props.handleEditContact(this.props.contact);
+        handleEditContact(contact);
     }
 
-    render() {
-        return(
-            <tr>
-                <td>{this.props.contact.name}</td>
-                <td>{this.props.contact.surname}</td>
-                <td>{this.props.contact.phone}</td>
-                <td>
-                    <button className="contacts__delete" onClick={this.handleRemoveClick}></button>
-                    <button className="contacts__edit" onClick={this.handleEditClick}></button>
-                </td>
-            </tr>
-        );
-    }
+    return(
+        <tr>
+            <td>{contact.name}</td>
+            <td>{contact.surname}</td>
+            <td>{contact.phone}</td>
+            <td>
+                <button className="contacts__delete" onClick={handleRemoveClick}></button>
+                <button className="contacts__edit" onClick={handleEditClick}></button>
+            </td>
+        </tr>
+    );
 }

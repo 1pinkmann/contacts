@@ -1,79 +1,32 @@
-import React, {Component} from 'react';
+import {React} from 'react';
 import ContactsTable from './ContactsTable';
 import ContactsButton from './ContactsButton';
 import ContactsForm from './ContactsForm';
 import './contacts.css';
 
-import {getContacts, removeContact, createContact, editContact} from '../service/contactsService';
+import { useContacts } from '../../../hooks/hooks';
 
-export default class Contacts extends Component {
+export default function Contacts () {
 
-    state = {
-        contacts: [],
-        showForm: false
-    }
+    const {
+        contacts,
+        handleRemove,
+        handleShow: handleShowForm,
+        handleSaveContact,
+        handleEditContact,
+        editingContact,
+        show: showForm
+    } = useContacts([]);
 
-    componentDidMount() {
-        getContacts().then(list => {
-            this.setState({contacts: list})
-        });
-    }
+    return (
+        <div className="contacts">
+            <ContactsTable contactsList={contacts} handleRemove={handleRemove}
+                           handleEditContact={handleEditContact}/>
+            <ContactsButton title="Добавить" handleClick={handleShowForm}/>
 
-    handleRemove = (id) => {
-        removeContact(id);
-
-        this.setState({contacts: this.state.contacts.filter((item) => item.id !== id)});
-    }
-
-    handleShowForm = () => {
-        this.setState({
-            showForm: !this.state.showForm
-        })
-
-        if (this.state.showForm === false) {
-            this.setState({
-                editingContact: null
-            })
-        }
-    }
-
-    handleSaveContact = (contact) => {
-        if (this.state.editingContact) {
-            let id = contact.id;
-            editContact(contact)
-                .then((data) => {
-                    this.setState({contacts: this.state.contacts.map(item => item.id !== id ? item : contact)});
-                    this.handleShowForm();
-                })
-        } else {
-            createContact(contact)
-                .then((res) => res.json())
-                .then((data) => {
-                    this.setState({contacts: [...this.state.contacts, data]});
-                    this.handleShowForm();
-                })
-        }
-
-    }
-
-    handleEditContact = (editingContact) => {
-        this.handleShowForm();
-        this.setState({
-            editingContact: editingContact
-        })
-    }
-
-    render() {
-        return (
-            <div className="contacts">
-                <ContactsTable contactsList={this.state.contacts} handleRemove={this.handleRemove}
-                               handleEditContact={this.handleEditContact}/>
-                <ContactsButton title="Добавить" handleClick={this.handleShowForm}/>
-
-                {this.state.showForm ?
-                    <ContactsForm handleSaveContact={this.handleSaveContact} handleHideForm={this.handleShowForm}
-                                  contact={this.state.editingContact}/> : null}
-            </div>
-        );
-    }
+            {showForm ?
+                <ContactsForm handleSaveContact={handleSaveContact} handleHideForm={handleShowForm}
+                              contact={editingContact}/> : null}
+        </div>
+    );
 }

@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ContactsHead extends Component {
+export default function ContactsHead () {
 
-    render() {
-        return(
-            <thead>
-                <tr>
-                    <td>Имя</td>
-                    <td>Фамилия</td>
-                    <td>Телефон</td>
-                    <td>Действия</td>
-                </tr>
-            </thead>
-        );
-    }
+    return(
+        <thead>
+            <tr>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Телефон</td>
+                <td>Действия</td>
+            </tr>
+        </thead>
+    );
 }

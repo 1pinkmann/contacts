@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ContactsItem from './ContactsItem';
 
-export default class ContactsBody extends Component {
+export default function ContactsBody ({contactsList, handleRemove, handleEditContact}) {
 
-    render() {
-        return (
-            <tbody>
-                {this.props.contactsList.map(item => {
-                    return <ContactsItem key = {item.id} contact = {item} handleRemove = {this.props.handleRemove} handleEditContact = {this.props.handleEditContact} />
-                })}
-            </tbody>
-        );
-    }
+    return (
+        <tbody>
+            {contactsList.map(item => {
+                return <ContactsItem key = {item.id} contact = {item} handleRemove = {handleRemove} handleEditContact = {handleEditContact} />
+            })}
+        </tbody>
+    );
 }
