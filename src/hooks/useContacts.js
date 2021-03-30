@@ -57,11 +57,11 @@ export function useContacts(defaultValue) {
 
     return {
         contacts,
-        show,
+        showForm: show,
         editingContact,
         setEditingContact,
         handleRemove,
-        handleShow,
+        handleShowForm: handleShow,
         handleSaveContact,
         handleEditContact
     }
