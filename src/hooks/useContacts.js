@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 
 import { put, get, remove, post } from '../modules/Contacts/services/todosService';
 
@@ -16,36 +16,33 @@ export function useContacts(defaultValue) {
         });
     };
 
-    let handleShow = useCallback(
-        () => {
-            setShow(!show);
-            if (show === false) {
-                setEditingContact(null);
-            }
-        }, [show]
-    );
+    let handleShow = () => {
+        setShow(!show);
+        if (show === false) {
+            setEditingContact(null);
+        }
+    };
 
-    let handleSaveContact = useCallback(
-        (contact) => {
-            if (editingContact) {
-                let id = contact.id;
-                put(contact, id)
-                    .then(() => {
-                        setContacts((contacts) => {
-                            return contacts.map(item => item.id !== id ? item : contact);
-                        })
-                        handleShow();
+    let handleSaveContact = (contact) => {
+        if (editingContact) {
+            let id = contact.id;
+            put(contact, id)
+                .then(() => {
+                    setContacts((contacts) => {
+                        return contacts.map(item => item.id !== id ? item : contact);
                     })
-            } else {
-                post(contact)
-                    .then(({data}) => {
-                        setContacts((contacts) => {
-                            return [...contacts, data]
-                        });
-                        handleShow();
-                    })
-            }
-        },[editingContact, handleShow]);
+                    handleShow();
+                })
+        } else {
+            post(contact)
+                .then(({data}) => {
+                    setContacts((contacts) => {
+                        return [...contacts, data]
+                    });
+                    handleShow();
+                })
+        }
+    }
 
     let handleEditContact = (editingContact) => {
         handleShow();
