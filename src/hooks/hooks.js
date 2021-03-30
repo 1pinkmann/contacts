@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-import { editContact, getContacts, removeContact, createContact } from './../modules/Contacts/service/contactsService';
+import { put, get, remove, post } from '../modules/Contacts/services/todosService';
 
 export function useContacts(defaultValue) {
 
@@ -11,8 +11,9 @@ export function useContacts(defaultValue) {
     const [editingContact, setEditingContact] = useState(null);
 
     let handleRemove = (id) => {
-        removeContact(id);
-        setContacts(contacts.filter((item) => item.id !== id))
+        remove(id).then(() => {
+            setContacts(contacts.filter((item) => item.id !== id))
+        });
     };
 
     let handleShow = () => {
@@ -25,16 +26,19 @@ export function useContacts(defaultValue) {
     let handleSaveContact = (contact) => {
         if (editingContact) {
             let id = contact.id;
-            editContact(contact)
-                .then((data) => {
-                    setContacts(contacts.map(item => item.id !== id ? item : contact))
+            put(contact, id)
+                .then(() => {
+                    setContacts((contacts) => {
+                        return contacts.map(item => item.id !== id ? item : contact);
+                    })
                     handleShow();
                 })
         } else {
-            createContact(contact)
-                .then((res) => res.json())
-                .then((data) => {
-                    setContacts([...contacts, data]);
+            post(contact)
+                .then(({data}) => {
+                    setContacts((contacts) => {
+                        return [...contacts, data]
+                    });
                     handleShow();
                 })
         }
@@ -46,8 +50,8 @@ export function useContacts(defaultValue) {
     }
 
     useEffect(() => {
-        getContacts().then(list => {
-            setContacts(list);
+        get().then(({data}) => {
+            setContacts(data);
         });
     }, [])
 
