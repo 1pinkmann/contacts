@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-import { put, get, remove, post } from '../modules/Contacts/services/todosService';
+import { put, get, remove, post } from '../modules/Contacts/services/service';
 
 export function useContacts(defaultValue) {
 
